@@ -55,11 +55,14 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF8</project.build.sourceEncoding>
         <slf4j.version>2.0.6</slf4j.version>
-        <jackson.version>2.14.1</jackson.version>
+        <jackson.version>2.15.1</jackson.version>
         <velocity.version>2.3</velocity.version>
-        <netty.version>4.1.86.Final</netty.version>
-        <httpcomponents.version>4.4.1</httpcomponents.version>
+        <netty.version>4.1.94.Final</netty.version>
+        <httpcomponents.version>4.4.16</httpcomponents.version>
+        <httpclient.version>4.5.14</httpclient.version>
         <bouncycastle.version>1.72</bouncycastle.version>
+        <guava.version>32.1.1-jre</guava.version>
+        <snakeyaml.version>2.0</snakeyaml.version>
         <!-- highest spring version is 5.3 due to Java 1.8 version -->
         <spring.version>5.3.28</spring.version>
         <spring-web.version>5.3.28</spring-web.version>
@@ -72,6 +75,9 @@
         <release.arguments />
         <javadoc.additional.parameters />
         <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
+        <!-- also update in docker -->
+        <!-- TODO(jamesdbloom) consider automating using `NETTY_TC_NATIVE_VERSION=$(./mvnw help:evaluate -Dexpression=netty-tcnative-boringssl-static.version -q -DforceStdout)` -->
+        <netty-tcnative-boringssl-static.version>2.0.61.Final</netty-tcnative-boringssl-static.version>
     </properties>
 
     <modules>
@@ -179,7 +185,7 @@
             <dependency>
                 <groupId>org.apache.httpcomponents</groupId>
                 <artifactId>httpclient</artifactId>
-                <version>4.5.14</version>
+                <version>${httpclient.version}</version>
             </dependency>
 
             <!-- Netty -->
@@ -416,7 +422,7 @@
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
-                <version>31.1-jre</version>
+                <version>${guava.version}</version>
             </dependency>
 
             <!-- classpath scanning -->
@@ -560,7 +566,7 @@
                 <!-- Conflicting versions in swagger-parser -->
                 <groupId>org.yaml</groupId>
                 <artifactId>snakeyaml</artifactId>
-                <version>1.33</version>
+                <version>${snakeyaml.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
